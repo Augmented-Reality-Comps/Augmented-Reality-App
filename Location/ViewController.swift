@@ -29,11 +29,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
 
         self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
-        self.motionManager.deviceMotionUpdateInterval = 0.1
+        self.motionManager.deviceMotionUpdateInterval = 0.01
         self.motionManager.startDeviceMotionUpdates()
     }
     
@@ -53,8 +53,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             self.yaw.text = "Yaw: " + String(format: "%i", Int(motionManager.deviceMotion.attitude.yaw*57.2957795131)) + "°"
         }
       
-        self.Latitude.text = "Latitude: " + String(format: "%f", location.coordinate.latitude )
-        self.longitude.text = "Longitude: " + String(format: "%f", location.coordinate.longitude)
+        self.Latitude.text = "Latitude: " + String(format: "%f", location.coordinate.latitude*10000 )
+        println(location.coordinate.latitude)
+        self.longitude.text = "Longitude: " + String(format: "%f", location.coordinate.longitude*10000)
         self.altitude.text = "Altitude: " + String(format: "%f", location.altitude)
 
 
